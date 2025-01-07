@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Добавляем стили для кнопок и их расположения */
+        h1 {
+            text-align: center;
+        }
+        body {
+            background-color: #393131;
+        }
+        .button-container {
+            display: grid; /* Используем grid для расположения кнопок */
+            grid-template-columns: repeat(5, 1fr); /* 5 столбцов */
+            gap: 10px; /* Отступы между кнопками */
+            justify-items: center; /* Центрируем кнопки по горизонтали */
+            margin-top: 50px; /* Отступ сверху для контейнера */
+            margin-bottom: 50px; /* Отступ снизу для контейнера */
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px; /* Отступ сверху для кнопок */
+            margin-bottom: 10px; /* Отступ снизу для кнопок */
+            background-color: #9dacff; /* Цвет фона кнопок */
+            color: white; /* Цвет текста кнопок */
+            border: none; /* Убираем границы */
+            border-radius: 10px; /* Скругление углов */
+        }
+        .button:hover {
+            background-color: #8496fd; /* Цвет фона при наведении */
+        }
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать в СГТК ЛИБ!</h1>
+    <div class="button-container">
+        <button class="button" onclick="window.location.href='{{ url_for('book_arrival') }}'">Приход книг</button>
+        <button class="button" onclick="window.location.href='{{ url_for('book_retirement') }}'">Выбыте книг</button>
+        <button class="button" onclick="window.location.href='{{ url_for('fund_movements') }}'">Итоги движения фонда</button>
+        <button class="button" onclick="window.location.href='{{ url_for('fund_receipt') }}'">Поступление в фонд</button>
+        <button class="button" onclick="window.location.href='{{ url_for('handbook') }}'">Справочник </button>
+        <button class="button" onclick="window.location.href='{{ url_for('inventory_book') }}'">Инвентарная книга</button>
+        <button class="button" onclick="window.location.href='{{ url_for('lib_record') }}'">Ведомость учёта библиотечного фонда</button>
+        <button class="button" onclick="window.location.href='{{ url_for('library_catalog') }}'">Библиотечный каталог</button>
+        <button class="button" onclick="window.location.href='{{ url_for('magazine_catalog') }}'">Каталог журналов и газет</button>
+        <button class="button" onclick="window.location.href='{{ url_for('reader_description') }}'">Читатели</button>
+
+    </div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>

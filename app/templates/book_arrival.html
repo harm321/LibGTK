@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приход книг</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='book_arrival.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <a href="index.html" class="nav-section">Главная</a>
+            <a href="handbook.html" class="nav-section">Справочник</a>
+            <button class="nav-section">Документы</button>
+            <div id="documents" class="submenu">
+                <a href="{{ url_for('book_arrival') }}">Приход книг</a>
+                <a href="reader_description.html">Читатели</a>
+                <a href="lib_record.html">Ведомость учёта библиотечного фонда</a>
+                <a href="inventory_book.html">Инвентарная книга</a>
+            </div>
+            <button class="nav-section">Отчёты</button>
+            <div id="reports" class="submenu">
+                <a href="fund_receipt.html">Книга суммарного учёта (Поступление в фонд)</a>
+            </div>
+        </aside>
+        <main>
+            <div class="header">
+                <h1 id="header-title">Приход книг</h1>
+                <p id="header-subtitle">{{ records|length }} книг</p>
+            </div>
+
+            <div class="controls">
+                <input type="text" placeholder="Поиск" name="search" value="{{ search_query }}">
+                <button class="button-action add-book-btn" id="addBookBtn">Добавить новую запись</button>
+                <button class="button-action export-button" onclick="window.location.href=`{{ url_for('export') }}`">Экспортировать</button>
+            </div>
+
+            <div id="addBookModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="document.getElementById('addBookModal').style.display='none'">&times;</span>
+                    <h2>Добавить книгу</h2>
+                    <form id="addBookForm" method="POST" action="{{ url_for('book_arrival') }}">
+                        <div class="form-grid">
+                            <label for="inventory_number">Инве��тарный номер:</label>
+                            <input type="text" id="inventory_number" name="inventory_number" required>
+                            <label for="title">Название издания:</label>
+                            <input type="text" id="title" name="title" required>
+                            <label for="authors">Автор(ы):</label>
+                            <input type="text" id="authors" name="authors">
+                            <label for="publication_year">Год издания:</label>
+                            <input type="number" id="publication_year" name="publication_year">
+                            <label for="publisher">Издательство:</label>
+                            <input type="text" id="publisher" name="publisher">
+                            <label for="isbn">ISBN:</label>
+                            <input type="text" id="isbn" name="isbn">
+                            <label for="total_copies">Всего экземпляров:</label>
+                            <input type="number" id="total_copies" name="total_copies" required>
+                            <label for="available_copies">Доступные экземпляры:</label>
+                            <input type="number" id="available_copies" name="available_copies" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Добавить</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Инвентарный номер</th>
+                            <th>Название</th>
+                            <th>Автор(ы)</th>
+                            <th>Год издания</th>
+                            <th>Издательство</th>
+                            <th>ISBN</th>
+                            <th>Всего экземпляров</th>
+                            <th>Доступные экземпляры</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if records %}
+                            {% for record in records %}
+                                <tr>
+                                    <td>{{ record.inventory_number }}</td>
+                                    <td>{{ record.title }}</td>
+                                    <td>{{ record.authors }}</td>
+                                    <td>{{ record.publication_year }}</td>
+                                    <td>{{ record.publisher }}</td>
+                                    <td>{{ record.isbn }}</td>
+                                    <td>{{ record.total_copies }}</td>
+                                    <td>{{ record.available_copies }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8" style="text-align: center;">Нет доступных записей</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='book_arrival.js') }}"></script>
+</body>
+
+</html>

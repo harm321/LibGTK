@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Справочник библиотечной системы</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='handbook.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <a href="index.html" class="nav-section">Главная</a>
+
+            <a href="handbook.html" class="nav-section">Справочник</a>
+
+            <a href="#" class="nav-section dropdown">Документы</a>
+            <div id="documents" class="submenu">
+                <a href="book_arrival.php">Приход книг</a>
+                <a href="reader_description.php">Читатели</a>
+                <a href="lib_record.php">Ведомость учёта библиотечного фонда</a>
+                <a href="inventory_book.php">Инвентарная книга</a>
+            </div>
+
+            <a href="#" class="nav-section dropdown">Отчёты</a>
+            <div id="reports" class="submenu">
+                <a href="fund_receipt.php">Книга суммарного учёта (Поступление в фонд)</a>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <h1>Справочник библиотечной системы</h1>
+
+            <!-- Основной раздел -->
+            <section class="main-section">
+                <h2>Общая информация</h2>
+                <div class="content">
+                    <h3>Назначение системы</h3>
+                    <p>Система предназначена для помощи в учёте, отчетности и управлении библиотечными ресурсами.</p>
+
+                    <h3>Основные функции</h3>
+                    <ul>
+                        <li>Добавление, редактирование и удаление записей</li>
+                        <li>Экспорт данных в Excel</li>
+                        <li>Управление библиотечным фондом</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Навигация по подразделам -->
+            <nav class="subsections">
+                <h3>Разделы справочника:</h3>
+                <ul>
+                    <li><a href="#documents">Раздел "Документы"</a></li>
+                    <li><a href="#reports">Раздел "Отчёты"</a></li>
+                    <li><a href="#actions">Общие действия</a></li>
+                    <li><a href="#tips">Советы по использованию</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#support">Поддержка</a></li>
+                </ul>
+            </nav>
+
+            <!-- Подраздел Документы -->
+            <section id="documents" class="subsection">
+                <h2>Раздел "Документы"</h2>
+                <div class="content">
+                    <h3>Приход книг</h3>
+                    <div class="subcontent">
+                        <h4>Учет новых поступлений</h4>
+                        <ul>
+                            <li>Название книги</li>
+                            <li>Автор</li>
+                            <li>Издательство</li>
+                            <li>Год издания</li>
+                            <li>Количество экземпляров</li>
+                        </ul>
+                        <p>Инструкция по добавлению новой записи:</p>
+                        <ol>
+                            <li>Заполните обязательные поля</li>
+                            <li>Проверьте корректность данных</li>
+                            <li>Нажмите кнопку "Сохранить"</li>
+                        </ol>
+                    </div>
+
+                    <h3>Читатели</h3>
+                    <div class="subcontent">
+                        <h4>Информация о читателях</h4>
+                        <ul>
+                            <li>ФИО читателя</li>
+                            <li>Номер читательского билета</li>
+                            <li>Контактная информация</li>
+                            <li>Дата регистрации</li>
+                        </ul>
+                    </div>
+
+                    <h3>Ведомость учёта библиотечного фонда</h3>
+                    <div class="subcontent">
+                        <h4>Основные поля</h4>
+                        <ul>
+                            <li>Инвентарные номера</li>
+                            <li>Авторы</li>
+                            <li>Названия книг</li>
+                            <li>Количество экземпляров</li>
+                            <li>Статус книги</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Подраздел Отчёты -->
+            <section id="reports" class="subsection">
+                <h2>Раздел "Отчёты"</h2>
+                <div class="content">
+                    <h3>Книга суммарного учёта</h3>
+                    <div class="subcontent">
+                        <h4>Поступление в фонд</h4>
+                        <ul>
+                            <li>Название издания</li>
+                            <li>Количество поступивших экземпляров</li>
+                            <li>Дата поступления</li>
+                            <li>Источник поступления</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Подраздел Общие действия -->
+            <section id="actions" class="subsection">
+                <h2>Общие действия и функционал</h2>
+                <div class="content">
+                    <h3>Поиск</h3>
+                    <div class="subcontent">
+                        <p>Используйте строку поиска для быстрого нахождения:</p>
+                        <ul>
+                            <li>Книг по названию</li>
+                            <li>Авторов</li>
+                            <li>Читателей по ФИО</li>
+                            <li>Инвентарных номеров</li>
+                        </ul>
+                    </div>
+
+                    <h3>Работа с записями</h3>
+                    <div class="subcontent">
+                        <h4>Добавление записи</h4>
+                        <p>Нажмите кнопку "Добавить" и заполните все необходимые поля</p>
+
+                        <h4>Редактирование записи</h4>
+                        <p>Используйте кнопку "Редактировать" для внесения изменений</p>
+
+                        <h4>Удаление записи</h4>
+                        <p>Внимание: удаление записей необратимо!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Подраздел Советы -->
+            <section id="tips" class="subsection">
+                <h2>Советы по использованию</h2>
+                <div class="content">
+                    <h3>Рекомендации</h3>
+                    <div class="subcontent">
+                        <ul>
+                            <li>Регулярно обновляйте данные</li>
+                            <li>Проверяйте корректность внесённой информации</li>
+                            <li>Создавайте резервные копии важных данных</li>
+                            <li>Следите за актуальностью информации</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Подраздел FAQ -->
+            <section id="faq" class="subsection">
+                <h2>FAQ</h2>
+                <div class="content">
+                    <h3>Частые вопросы</h3>
+                    <div class="subcontent">
+                        <h4>Как добавить нового читателя?</h4>
+                        <p>Перейдите в раздел "Читатели" и нажмите кнопку "Добавить"</p>
+
+                        <h4>Как найти книгу?</h4>
+                        <p>Используйте поисковую строку в верхней части экрана</p>
+
+                        <h4>Как исправить ошибку в записи?</h4>
+                        <p>Найдите нужную запись и нажмите кнопку "Редактировать"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Подраздел Поддержка -->
+            <section id="support" class="subsection">
+                <h2>Поддержка</h2>
+                <div class="content">
+                    <h3>Контакты службы поддержки</h3>
+                    <div class="subcontent">
+                        <p>Телефон: +7 (XXX) XXX-XX-XX</p>
+                        <p>Email: support@example.com</p>
+                        <p>Время работы: Пн-Пт, 9:00 - 18:00</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='handbook.js') }}"></script>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приход книг</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='inventory_book.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+
+            <a href="index.html" class="nav-section">Главная</a>
+
+            <a href="handbook.html" class="nav-section">Справочник</a>
+
+            <button class="nav-section">Документы</button>
+            <div id="documents" class="submenu">
+                <a href="book_arrival.php">Приход книг</a>
+                <a href="reader_description.php">Читатели</a>
+                <a href="lib_record.php">Ведомость учёта библиотечного фонда</a>
+                <a href="inventory_book.php">Инвентарная книга</a>
+            </div>
+
+            <button class="nav-section">Отчёты</button>
+            <div id="reports" class="submenu">
+                <a href="fund_receipt.php">Книга суммарного учёта (Поступление в фонд)</a>
+            </div>
+
+        </aside>
+        <main>
+            <div class="header">
+                <h1 id="header-title">Инвентарная книга</h1>
+                <p id="header-subtitle">N книг</p>
+            </div>
+
+            <div class="controls">
+                <input type="text" placeholder="Поиск">
+                <div class="dropdown">
+                    <div class="dropdown-content">
+                        <div class="button-container">
+                            <button class="select-all-button">Выделить всё</button>
+                            <button class="reset-button">Сбросить</button>
+                        </div>
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="column" checked>
+                            <span class="checkbox-custom"></span>
+                            Клонка
+                        </label>
+                    </div>
+                    <button class="button-action add-book-btn"><img src="./img/ico-reader.svg"
+                            alt="Иконка добавления читателя" class="button-icon">Добавить новую запись</button>
+                    <button class="button-action export-button"><img src="./img/ico-export.svg" alt="Икнка экспота"
+                            class="button-icon">Экспортировать</button>
+                </div>
+            </div>
+
+            <div id="addBookModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Добавить книгу</h2>
+                    <form id="addBookForm">
+                        <input type="hidden" name="id" id="record_id">
+                        <div class="form-grid">
+                            <div>
+                                <label for="title">Название книги:</label>
+                                <input type="text" id="title" name="title" required>
+                            </div>
+                            <div>
+                                <label for="authors">Автор(ы):</label>
+                                <input type="text" id="authors" name="authors" required>
+                            </div>
+                            <div>
+                                <label for="publication_year">Год издания:</label>
+                                <input type="number" id="publication_year" name="publication_year" required>
+                            </div>
+                            <div>
+                                <label for="publisher">Издательство:</label>
+                                <input type="text" id="publisher" name="publisher" required>
+                            </div>
+                            <div>
+                                <label for="ISBN">ISBN:</label>
+                                <input type="text" id="ISBN" name="ISBN" required>
+                            </div>
+                            <div>
+                                <label for="inventory_number">Инвентарный номер:</label>
+                                <input type="text" id="inventory_number" name="inventory_number" required>
+                            </div>
+                            <div>
+                                <label for="category">Категория:</label>
+                                <select id="category" name="category" required>
+                                    <option value="Учебная литература">Учебная литература</option>
+                                    <option value="Художественная литература">Художественная литература</option>
+                                    <option value="Научная литература">Научная литература</option>
+                                    <option value="Справочная литература">Справочная литература</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="location">Местоположение:</label>
+                                <input type="text" id="location" name="location" required>
+                            </div>
+                            <div>
+                                <label for="entry_date">Дата поступления:</label>
+                                <input type="date" id="entry_date" name="entry_date" required>
+                            </div>
+                            <div>
+                                <label for="condition">Состояние:</label>
+                                <select id="condition" name="condition" required>
+                                    <option value="Новая">Новая</option>
+                                    <option value="Хорошее">Хорошее</option>
+                                    <option value="Удовлетворительное">Удовлетворительное</option>
+                                    <option value="Требует ремонта">Требует ремонта</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="availability">Доступность:</label>
+                                <select id="availability" name="availability" required>
+                                    <option value="1">Доступна</option>
+                                    <option value="0">Недоступна</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="fixed-checkbox">
+                                <input type="checkbox" id="selectAll">
+                            </th>
+                            <th>Название книги</th>
+                            <th>Автор(ы)</th>
+                            <th>Год издания</th>
+                            <th>Издательство</th>
+                            <th>ISBN</th>
+                            <th>Инвентарный номер</th>
+                            <th>Категория</th>
+                            <th>Местоположение</th>
+                            <th>Дата поступления</th>
+                            <th>Состояние</th>
+                            <th>Доступность</th>
+                            <th class="fixed-menu">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Данные будут загружены через JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="assets/js/database-handler.js"></script>
+    <script src="{{ url_for('static', filename='inventory_book.js') }}"></script>
+</body>
+
+</html>
